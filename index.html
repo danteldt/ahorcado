@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<title>Ahorcado - Alura</title>
+	</head>
+
+<body>
+	<main>
+		<img src="Vector.png" class="logo">
+		<div id="parte1">
+			<form>
+				<p class="titulo"> HORCADO </p>
+				<p class="titulo2"> Alura - Game</p>
+				<img src="muñeco.png" class="muñeco-logo">
+				<input type="button" value="Iniciar juego" class="iniciar" id="iniciar">
+				<input type="button" value="Agregar nueva palabra" class="agregar" id="agregar">
+			</form>
+		</div>
+		<div id="parte2">
+			<img src="alerta.png" class="alerta" id="alerta">
+			<p class="alertatext" id="alertatext"> Máx. 8 letras </p>
+			<form>
+				<textarea class="texto" id="texto" required placeholder="Ingrese una palabra"></textarea>
+			<form>
+				<input type="button" class="guardar" value="Guardar y empezar" id="guardar">
+				<input type="button" class="cancelar" value="Cancelar" id="cancelar">
+			</form>
+		</div>
+		<div id="parte3">
+			<div class="muñeco" id="muñeco">
+				<img src="horcabase.png" class="horcabase" id="horcabase">
+				<img src="horca1.png" class="horca1" id="horca1">
+				<img src="horca2.png" class="horca2" id="horca2">
+				<img src="horca3.png" class="horca3" id="horca3">
+				<img src="cabeza.png" class="cabeza" id="cabeza"> 
+				<img src="cuerpo.png" class="cuerpo" id="cuerpo"> 
+				<img src="brazoizq.png" class="brazo1" id="brazo1">
+				<img src="brazoder.png" class="brazo2" id="brazo2">
+				<img src="piernaizq.png" class="pierna1" id="pierna1">
+				<img src="piernader.png" class="pierna2" id="pierna2">			
+			</div>
+			<div class="fin" id="fin">
+				<p> ¡Fin del juego!</p>
+			</div>
+			<div class="ganaste" id="ganaste">
+				<p> Felicidades ganaste!! </p>
+			</div>
+			<div class="palabra" id="palabra">
+				<p class="l1" id="l1">A</p>
+				<p class="l2" id="l2">L</p>
+				<p class="l3" id="l3">U</p>
+				<p class="l4" id="l4">R</p>
+				<p class="l5" id="l5">A</p>
+				<p class="l6" id="l6">O</p>
+				<p class="l7" id="l7">N</p>
+				<p class="l8" id="l8">E</p>
+			</div>
+			<div class="letrasfail" id="letrasfail">
+				<p class="p1" id="p1">B</p>
+				<p class="p2" id="p2">C</p>
+				<p class="p3" id="p3">D</p>
+				<p class="p4" id="p4">F</p>
+				<p class="p5" id="p5">G</p>
+				<p class="p6" id="p6">H</p>
+				<p class="p7" id="p7">I</p>
+				<p class="p8" id="p8">J</p>
+				<p class="p9" id="p9">K</p>
+				<p class="p10" id="p10">L</p>
+
+			</div>
+				<div class="guiones" >
+				<div class="guion1" id="g1"> </div>
+				<div class="guion2" id="g2"> </div>
+				<div class="guion3" id="g3"> </div>
+				<div class="guion4" id="g4"> </div>
+				<div class="guion5" id="g5"> </div>
+				<div class="guion6" id="g6"> </div>
+				<div class="guion7" id="g7"> </div>
+				<div class="guion8" id="g8"> </div>		
+			</div>
+			<form>
+				<a href="ahorcado.html">
+				<input type="button" class="nuevo" value="Nuevo juego" id="nuevo">
+				<input type="button" value="Desistir" class="desistir" id="desistir">
+				</a>
+				
+			</form>														
+		</div>
+	</main>
+</body>
+</html>
+
+<script type="text/javascript">
+
+	//general
+	var parte1= document.getElementById("parte1")
+	var parte2= document.getElementById("parte2")
+	var parte3 = document.getElementById("parte3")
+	parte2.style.display = "none"
+	parte3.style.display="none"
+	//parte1
+	var iniciar = document.getElementById("iniciar")
+	var agregar = document.getElementById("agregar")
+	agregar.onclick = parte1aparte2 
+	iniciar.onclick = iniciarjuego
+	//parte2
+	var guardar = document.getElementById("guardar")
+	var cancelar= document.getElementById("cancelar")
+	var texto = document.getElementById("texto")
+	cancelar.onclick = parte2aparte1
+	guardar.onclick = iniciarjuego2
+	//parte3
+	//botones
+	var nuevojuego= document.getElementById("nuevo")
+	var desistir = document.getElementById("desistir")
+	//muñeco
+	var muñeco = document.getElementById("muñeco")
+	var	horcabase = document.getElementById("horcabase")
+	var	horca1 = document.getElementById("horca1")
+	var horca2 = document.getElementById("horca2")
+	var horca3 = document.getElementById("horca3")
+	var cabeza = document.getElementById("cabeza")
+	var cuerpo  = document.getElementById("cuerpo")
+	var brazo1 = document.getElementById("brazo1")
+	var brazo2 = document.getElementById("brazo2")
+	var pierna1 = document.getElementById("pierna1")
+	var pierna2 = document.getElementById("pierna2")
+	horcabase.style.display = "none"
+	horca1.style.display = "none"
+	horca2.style.display = "none"
+	horca3.style.display = "none"
+	cabeza.style.display = "none"
+	cuerpo.style.display = "none"
+	brazo1.style.display = "none"
+	brazo2.style.display = "none"
+	pierna1.style.display = "none"
+	pierna2.style.display = "none"
+	//letras
+	var palabra = document.getElementById("palabra")
+	var letra1 = document.getElementById("l1")
+	var letra2 = document.getElementById("l2")
+	var letra3 = document.getElementById("l3")
+    var letra4 = document.getElementById("l4")
+	var letra5 = document.getElementById("l5")
+	var letra6 = document.getElementById("l6")
+	var letra7 = document.getElementById("l7")
+	var letra8 = document.getElementById("l8")
+	letra1.style.display = "none"
+	letra2.style.display = "none"
+	letra3.style.display = "none"
+	letra4.style.display = "none"
+	letra5.style.display = "none"
+	letra6.style.display = "none"
+	letra7.style.display = "none"
+	letra8.style.display = "none"
+	//letraserradas
+	var letrafail1 = document.getElementById("p1")
+	var letrafail2 = document.getElementById("p2")
+	var letrafail3 = document.getElementById("p3")
+	var letrafail4 = document.getElementById("p4")
+	var letrafail5 = document.getElementById("p5")
+	var letrafail6 = document.getElementById("p6")
+	var letrafail7 = document.getElementById("p7")
+	var letrafail8 = document.getElementById("p8")
+	var letrafail9 = document.getElementById("p9")
+	var letrafail10 = document.getElementById("p10")
+	var letrasfail = document.getElementById("letrasfail")
+	letrafail1.style.display = "none"
+	letrafail2.style.display = "none"
+	letrafail3.style.display = "none"
+	letrafail4.style.display = "none"
+	letrafail5.style.display = "none"
+	letrafail6.style.display = "none"
+	letrafail7.style.display = "none"
+	letrafail8.style.display = "none"
+	letrafail9.style.display = "none"
+	letrafail10.style.display = "none"
+	finfail= document.getElementById("fin")
+	ganaste= document.getElementById("ganaste")
+	finfail.style.display = "none"
+	ganaste.style.display = "none"
+	//guiones
+	var guion1 = document.getElementById("g1")
+	var guion2 = document.getElementById("g2")
+	var guion3 = document.getElementById("g3")
+	var guion4 = document.getElementById("g4")
+	var guion5 = document.getElementById("g5")
+	var guion6 = document.getElementById("g6")
+	var guion7 = document.getElementById("g7")
+	var guion8 = document.getElementById("g8")
+	guion1.style.display = "none"
+	guion2.style.display = "none"
+	guion3.style.display = "none"
+	guion4.style.display = "none"
+	guion5.style.display = "none"
+	guion6.style.display = "none"
+	guion7.style.display = "none"
+	guion8.style.display = "none"
+
+
+
+//funciones
+	function parte2aparte3(){
+		parte2.style.display = "none"
+		parte3.style.display = "block"
+    }
+	function parte1aparte3(){
+		parte1.style.display = "none"
+		parte3.style.display = "block"
+	}
+	function parte1aparte2(){
+		parte1.style.display = "none"
+		parte2.style.display = "block"
+	}
+	function parte2aparte1(){
+		parte2.style.display = "none"
+		parte1.style.display = "block"
+	}
+	function parte3aparte1(){
+		parte3.style.display = "none"
+		parte1.style.display = "block"
+	}
+ 	
+
+function palabrasecreta(){
+	palabrasecret = texto.value
+	if (palabrasecret.length > 0) {
+		if (palabrasecret.length < 9){
+			return(palabrasecret.toUpperCase())
+		}
+		else{
+			alert("Su palabra supera los 8 caracteres permitidos")
+		}
+	}
+}
+
+function palabrarandom(){
+	var palabrasecretas = ["ALURA", "ALURAONE", "HTML", "JAVA", "ASADO", "MATE", "BOCA", "BRASIL", "PROGRAMA", "AHORCADO", "CSS", "PARIS", "BERLIN" ]
+	aleatorio = Math.floor(Math.random() * palabrasecretas.length)
+	palabraleatoria = palabrasecretas[aleatorio]
+	var palabradeljuego = palabraleatoria
+	return(palabradeljuego)
+}
+
+function iniciarjuego(){
+	var palabrainicio = palabrarandom()
+	guiones(palabrainicio)
+	var palabradeljuego = palabrainicio
+	separado1(palabrainicio)
+	parte1aparte3()
+	document.addEventListener("keydown", teclapresionada)
+	function teclapresionada(event){
+		console.log(KeyboardEvent)
+		tecla = event.key.toUpperCase()
+		console.log (letrasvalidadas.includes(tecla))
+		letrascorrectas(event, palabradeljuego)
+		letrasfallidas(event, palabradeljuego)
+		ganaste1(palabradeljuego)
+		if (document.getElementById("p10").style.display === "block"){
+    		return (palabradeljuego = 0)
+		}
+		if (ganaste.style.display === "block") {
+ 			return (palabradeljuego = 0)
+ 		}
+ 	}
+}
+
+
+
+function iniciarjuego2(){
+	var palabrainicio = palabrasecreta()
+	guiones(palabrainicio)
+	var palabradeljuego = palabrainicio
+	separado1(palabrainicio)
+	parte2aparte3()
+	document.addEventListener("keydown", teclapresionada)
+	function teclapresionada(event){
+		console.log(KeyboardEvent)
+		tecla = event.key.toUpperCase()
+		console.log (letrasvalidadas.includes(tecla))
+		letrascorrectas(event, palabradeljuego)
+		letrasfallidas(event, palabradeljuego)
+		ganaste1(palabradeljuego)
+		if (document.getElementById("p10").style.display === "block"){
+    		return (palabradeljuego = 0)	
+		}
+ 		if (ganaste.style.display === "block") {
+ 			return (palabradeljuego = 0)
+ 		}
+	}
+}
+
+function guiones(palabra){
+
+	if (palabra.length === 1){
+		guion1.style.display = "block"
+	}
+	else if(palabra.length === 2){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+	}
+	else if(palabra.length === 3){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+	}
+	else if(palabra.length === 4){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+		guion4.style.display = "block"
+	}
+	else if(palabra.length === 5){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+		guion4.style.display = "block"
+		guion5.style.display = "block"
+	}
+	else if(palabra.length === 6){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+		guion4.style.display = "block"
+		guion5.style.display = "block"
+		guion6.style.display = "block"
+	}
+	else if(palabra.length === 7){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+		guion4.style.display = "block"
+		guion5.style.display = "block"
+		guion6.style.display = "block"
+		guion7.style.display = "block"
+	}
+	else if(palabra.length === 8){
+		guion1.style.display = "block"
+		guion2.style.display = "block"
+		guion3.style.display = "block"
+		guion4.style.display = "block"
+		guion5.style.display = "block"
+		guion6.style.display = "block"
+		guion7.style.display = "block"
+		guion8.style.display = "block"
+	}
+}
+	
+		
+letrasvalidadas= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","ñ","o","p","q","r","s","t","u","v","w","x","y","z"]
+
+
+function ganaste1(palabradeljuego){
+  	if (palabradeljuego.length === 1 && letra1.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 2 && letra1.style.display === "block" && letra2.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 3 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display ==="block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 4 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display === "block"  && letra4.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 5 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display === "block"  && letra4.style.display === "block"  && letra5.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 6 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display === "block"  && letra4.style.display === "block"&& letra5.style.display === "block"  && letra6.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 7 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display === "block"  && letra4.style.display === "block" && letra5.style.display === "block" && letra6.style.display === "block"  && letra7.style.display === "block"){
+		ganaste.style.display = "block"
+	}
+	else if (palabradeljuego.length === 8 && letra1.style.display === "block" && letra2.style.display === "block" && letra3.style.display === "block"  && letra4.style.display === "block"  && letra5.style.display === "block" && letra6.style.display === "block" && letra7.style.display === "block"  && letra8.style.display === "block"){
+		ganaste.style.display = "block"
+   	}
+}
+
+		
+function separado1(palabrainicio){
+   	var palabradeljuego = palabrainicio
+   	separado = palabradeljuego.split('')
+	console.log(separado)
+	l1=document.getElementById("l1").innerHTML = palabradeljuego[0]
+	l2=document.getElementById("l2").innerHTML = palabradeljuego[1]
+	l3=document.getElementById("l3").innerHTML = palabradeljuego[2]
+	l4=document.getElementById("l4").innerHTML = palabradeljuego[3]
+	l5=document.getElementById("l5").innerHTML = palabradeljuego[4]
+	l6=document.getElementById("l6").innerHTML = palabradeljuego[5]
+	l7=document.getElementById("l7").innerHTML = palabradeljuego[6]
+	l8=document.getElementById("l8").innerHTML = palabradeljuego[7]
+   	return palabradeljuego
+}
+
+
+function letrascorrectas(event, palabradeljuego){
+  	if (tecla === palabradeljuego[0] ){
+		letra1.style.display = "block"	
+	}
+	if (tecla === palabradeljuego[1] ){
+		letra2.style.display = "block"	
+	}
+	if (tecla === palabradeljuego[2]){
+   		letra3.style.display = "block"	
+	}
+	if (tecla === palabradeljuego[3] ){
+		letra4.style.display = "block"	
+  	}
+  	if (tecla === palabradeljuego[4]){
+  	  	letra5.style.display = "block"	
+    }
+    if (tecla === palabradeljuego[5]){
+   		letra6.style.display = "block"	
+    }
+ 	if (tecla === palabradeljuego[6]){
+    	letra7.style.display = "block"	
+ 	}
+    if (tecla === palabradeljuego[7]){
+		letra8.style.display = "block"	
+	}
+}
+
+function letrasfallidas(event, palabradeljuego){
+  	if (palabradeljuego.includes(tecla) === false && letrasvalidadas.includes(tecla)){
+		if(document.getElementById("p1").style.display === "none"  ){
+			p1= document.getElementById("p1").innerHTML  = tecla
+			letrafail1.style.display = "block"
+			horcabase.style.display = "block"
+		}
+		else if(document.getElementById("p1").style.display === "block" && document.getElementById("p2").style.display === "none" && document.getElementById("p1").nnerHTML != tecla){
+			p2= document.getElementById("p2").innerHTML  = tecla
+			letrafail2.style.display = "block"
+			horca1.style.display = "block"
+		}
+		else if(document.getElementById("p2").style.display === "block" && document.getElementById("p3").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla){
+			p3= document.getElementById("p3").innerHTML  = tecla
+			letrafail3.style.display = "block"
+			horca2.style.display = "block"
+		}
+		else if(document.getElementById("p3").style.display === "block" && document.getElementById("p4").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla){
+			p4= document.getElementById("p4").innerHTML  = tecla
+			letrafail4.style.display = "block"
+			horca3.style.display = "block"
+		}
+		else if(document.getElementById("p4").style.display === "block" && document.getElementById("p5").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla && document.getElementById("p4").innerHTML != tecla){
+			p5= document.getElementById("p5").innerHTML  = tecla
+			letrafail5.style.display = "block"
+			cabeza.style.display = "block"
+		}
+		else if(document.getElementById("p5").style.display === "block" && document.getElementById("p6").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla && document.getElementById("p4").innerHTML != tecla && document.getElementById("p5").innerHTML != tecla ){
+			p6= document.getElementById("p6").innerHTML  = tecla
+			letrafail6.style.display = "block"
+			cuerpo.style.display = "block"
+		}
+		else if(document.getElementById("p6").style.display === "block" && document.getElementById("p7").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla && document.getElementById("p4").innerHTML != tecla && document.getElementById("p5").innerHTML != tecla && document.getElementById("p6").innerHTML != tecla){
+			p7= document.getElementById("p7").innerHTML  = tecla
+			letrafail7.style.display = "block"
+			brazo1.style.display = "block"
+		}
+		else if(document.getElementById("p7").style.display === "block"&& document.getElementById("p8").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla && document.getElementById("p4").innerHTML != tecla && document.getElementById("p5").innerHTML != tecla && document.getElementById("p6").innerHTML != tecla && document.getElementById("p7").innerHTML != tecla ){
+			p8= document.getElementById("p8").innerHTML  = tecla
+			letrafail8.style.display = "block"
+			brazo2.style.display = "block"
+		}
+		else if(document.getElementById("p8").style.display === "block" && document.getElementById("p9").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML != tecla && document.getElementById("p3").innerHTML != tecla && document.getElementById("p4").innerHTML != tecla && document.getElementById("p5").innerHTML != tecla && document.getElementById("p6").innerHTML != tecla && document.getElementById("p7").innerHTML !=tecla && document.getElementById("p8").innerHTML != tecla){
+			p9= document.getElementById("p9").innerHTML  = tecla
+			letrafail9.style.display = "block"
+			pierna1.style.display = "block"
+		}
+		else if(document.getElementById("p9").style.display === "block" && document.getElementById("p10").style.display === "none" && document.getElementById("p1").innerHTML != tecla && document.getElementById("p2").innerHTML !=tecla && document.getElementById("p3").innerHTML != teclatecla && document.getElementById("p4").innerHTML != tecla && document.getElementById("p5").innerHTML != tecla && document.getElementById("p6").innerHTML != tecla && document.getElementById("p7").innerHTML != tecla && document.getElementById("p8").innerHTML != tecla && document.getElementById("p9").innerHTML != tecla ){
+			p10= document.getElementById("p10").innerHTML  = tecla
+			letrafail10.style.display = "block"
+			pierna2.style.display = "block"
+			finfail.style.display = "block"
+   		}
+  	}
+}
+
+	
+</script>
